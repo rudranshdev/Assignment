@@ -1,0 +1,107 @@
+<html>
+
+<head>
+    <title>Tax Calculator</title>
+    <style>
+        body {
+            font-family: 'Times New Roman';
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: white;
+        }
+
+        .calculator {
+            border: lightgray;
+            padding: 25px;
+            border-radius: 2cm;
+            background-color: white;
+            text-align: center;
+            width: 300px;
+            border-style: ridge;
+            border-width: 1cm;
+            
+        }
+
+        .calculator input, .calculator select, .calculator button {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid yellowgreen;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .calculator button {
+            background-color: green;
+            color: white;
+        }
+
+        .calculator button:hover {
+            background-color: green;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>Tax Calculator</h1>
+        
+        <input type="number" id="amount" placeholder="Enter Amount (in Rs)">
+        
+        <select id="type">
+            <option value="1">Food (18% tax)</option>
+            <option value="2">Finance (26% tax)</option>
+            <option value="3">Loans (10% tax)</option>
+            <option value="4">Gold (20% tax)</option>
+        </select>
+        
+        <button onclick="calculateTax()">Calculate Total</button>
+        
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateTax() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            const type = document.getElementById('type').value;
+            if(amount<=0){
+                document.getElementById("result").innerHTML = "Error";
+                alert("You are gay");
+                return;
+            }
+            let taxPercentage;
+            
+            switch(type) {
+                case '1':
+                    taxPercentage = 18;
+                    break;
+                case '2':
+                    taxPercentage = 26;
+                    break;
+                case '3':
+                    taxPercentage = 10;
+                    break;
+                case '4':
+                    taxPercentage = 20;
+                    break;
+                default:
+                    taxPercentage = 0;
+            }
+
+            const taxAmount = (amount * taxPercentage) / 100;
+            const totalAmount = amount + taxAmount;
+            
+            document.getElementById('result').innerText = `Total Amount (including tax): ₹ ${totalAmount.toFixed(2)}\n
+            Total Tax: ₹ ${taxAmount.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
